@@ -25,7 +25,7 @@ set(COMMON_WARN_FLAGS
 	-Wdouble-promotion
 	-Wsign-conversion
 	-Wvla
-	-pedantic-errors
+	-Wpedantic
 )
 
 
