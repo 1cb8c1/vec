@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31)
-project(vector C)
+project(vec C)
 
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -28,10 +28,12 @@ set(COMMON_WARN_FLAGS
 	-Wpedantic
 )
 
-
 add_library(vec STATIC src/vector.c)
+
+set_target_properties(vec PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib
+)
+
 target_include_directories(vec PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
-
-
-
+target_compile_options(vec PUBLIC ${COMMON_WARN_FLAGS})
