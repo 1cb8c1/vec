@@ -3,4 +3,4 @@ build:
 	cmake --build build
 
 clean:
-	rm -rf build/*
+	rm -rf build
