@@ -25,7 +25,7 @@ set(COMMON_WARN_FLAGS
 	-Wdouble-promotion
 	-Wsign-conversion
 	-Wvla
-	-Wpedantic
+	# -Wpedantic # Turned off to allow GNU extensions.
 )
 
 add_library(vec STATIC src/vector.c)
@@ -35,5 +35,12 @@ set_target_properties(vec PROPERTIES
 )
 
 target_include_directories(vec PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_compile_options(vec PUBLIC ${COMMON_WARN_FLAGS} -std=gnu23)
+target_link_libraries(vec PUBLIC quadmath)
 
-target_compile_options(vec PUBLIC ${COMMON_WARN_FLAGS})
+# Testing
+enable_testing()
+add_executable(vec_tests tests/vector.spec.c)
+target_link_libraries(vec_tests PRIVATE vec quadmath)
+target_include_directories(vec_tests PRIVATE include)
+add_test(NAME vec_tests COMMAND vec_tests)
