@@ -36,11 +36,11 @@ set_target_properties(vec PROPERTIES
 
 target_include_directories(vec PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_compile_options(vec PUBLIC ${COMMON_WARN_FLAGS} -std=gnu23)
-target_link_libraries(vec PUBLIC quadmath)
+target_link_libraries(vec PUBLIC m)
 
 # Testing
 enable_testing()
 add_executable(vec_tests tests/vector.spec.c)
-target_link_libraries(vec_tests PRIVATE vec quadmath)
+target_link_libraries(vec_tests PRIVATE vec m)
 target_include_directories(vec_tests PRIVATE include)
 add_test(NAME vec_tests COMMAND vec_tests)

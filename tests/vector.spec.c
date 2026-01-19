@@ -1,11 +1,10 @@
 #include <assert.h>
-#include <quadmath.h>
 #include "vector.h"
 
-static bool __float128_eq(__float128 a, __float128 b)
+static bool float_eq(float a, float b)
 {
-	constexpr __float128 epsilon = FLT128_EPSILON;
-	const __float128 absdiff = fabsq(a - b);
+	constexpr float epsilon = 1e-6f; // 1e-6 = 0.000001
+	const float absdiff = a > b ? a - b : b - a;
 	if (absdiff <= epsilon) {
 		return true;
 	}
@@ -13,29 +12,29 @@ static bool __float128_eq(__float128 a, __float128 b)
 }
 
 
-static void test_vec3_q_add_spec_add_every_element(void)
+static void test_vec3_f_add_spec_add_every_element(void)
 {
-	struct vec3_q a = {1.0Q, 2.0Q, 3.0Q};
-	struct vec3_q b = {4.0Q, 5.0Q, 6.0Q};
-	struct vec3_q result = vec3_q_add(a, b);
-	assert(__float128_eq(result.x, 5.0Q));
-	assert(__float128_eq(result.y, 7.0Q));
-	assert(__float128_eq(result.z, 9.0Q));
+	struct vec3_f a = {1.0f, 2.0f, 3.0f};
+	struct vec3_f b = {4.0f, 5.0f, 6.0f};
+	struct vec3_f result = vec3_f_add(a, b);
+	assert(float_eq(result.x, 5.0f));
+	assert(float_eq(result.y, 7.0f));
+	assert(float_eq(result.z, 9.0f));
 }
 
-static void test_vec3_q_sub_spec_subtract_every_element(void)
+static void test_vec3_f_sub_spec_subtract_every_element(void)
 {
-	struct vec3_q a = {5.0Q, 7.0Q, 9.0Q};
-	struct vec3_q b = {4.0Q, 5.0Q, 6.0Q};
-	struct vec3_q result = vec3_q_sub(a, b);
-	assert(__float128_eq(result.x, 1.0Q));
-	assert(__float128_eq(result.y, 2.0Q));
-	assert(__float128_eq(result.z, 3.0Q));
+	struct vec3_f a = {5.0f, 7.0f, 9.0f};
+	struct vec3_f b = {4.0f, 5.0f, 6.0f};
+	struct vec3_f result = vec3_f_sub(a, b);
+	assert(float_eq(result.x, 1.0f));
+	assert(float_eq(result.y, 2.0f));
+	assert(float_eq(result.z, 3.0f));
 }
 
 int main(void)
 {
- 	test_vec3_q_add_spec_add_every_element();
-	test_vec3_q_sub_spec_subtract_every_element();
-	return EXIT_SUCCESS;
+ 	test_vec3_f_add_spec_add_every_element();
+	test_vec3_f_sub_spec_subtract_every_element();
+	return 0;
 }
