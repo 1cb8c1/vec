@@ -15,4 +15,4 @@ struct vec3_f 	vec3_f_mul(struct vec3_f v1, struct vec3_f v2);
 struct vec3_f 	vec3_f_cross(struct vec3_f v1, struct vec3_f v2);
 float  		vec3_f_dist(struct vec3_f v1, struct vec3_f v2);
 
-#endif // VECTOR_H
+#endif /* VECTOR_H */

@@ -1,5 +1,5 @@
 #include "vector.h"
-#include <math.h>
+#include "vmath.h"
 
 struct vec3_f vec3_f_add(struct vec3_f v1, struct vec3_f v2)
 {
@@ -30,7 +30,8 @@ struct vec3_f vec3_f_scale(struct vec3_f v, float s)
 
 float vec3_f_dot(struct vec3_f v1, struct vec3_f v2)
 {
-	return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	float result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	return result;
 }
 
 struct vec3_f vec3_f_mul(struct vec3_f v1, struct vec3_f v2)
@@ -56,5 +57,7 @@ float vec3_f_dist(struct vec3_f v1, struct vec3_f v2)
 	float dx = v1.x - v2.x;
 	float dy = v1.y - v2.y;
 	float dz = v1.z - v2.z;
-	return sqrtf(dx * dx + dy * dy + dz * dz);
+	float dist_squared = dx * dx + dy * dy + dz * dz;
+	float result = sqrt_f_positive_unsafe(dist_squared);
+	return result;
 }
