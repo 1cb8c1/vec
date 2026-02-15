@@ -48,6 +48,6 @@ endif()
 # Testing
 enable_testing()
 add_executable(vec_tests tests/vector.spec.c)
-target_include_directories(vec_tests PRIVATE include)
+target_include_directories(vec_tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(vec_tests PRIVATE vec)
 add_test(NAME vec_tests COMMAND vec_tests)
